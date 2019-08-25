@@ -1,0 +1,26 @@
+{"ec2types": {
+    "ec2definition": [
+    {
+        "SubnetId": "lolgotu",
+        "DeviceIndex": 0,
+        "AssociatePublicIpAddress": true,
+        "Groups": "fizz"},
+    {
+        "SubnetId": "this is a different one",
+        "DeviceIndex": 1,
+        "AssociatePublicIpAddress": false,
+        "Groups": "buzz"}
+    ],
+    "ec2definition2": [
+    {
+        "SubnetId": "lolgotu",
+        "DeviceIndex": 0,
+        "AssociatePublicIpAddress": true,
+        "Groups": "fizz"},
+    {
+        "SubnetId": "this is a different one",
+        "DeviceIndex": 1,
+        "AssociatePublicIpAddress": false,
+        "Groups": "buzz"}
+    ]
+}}
