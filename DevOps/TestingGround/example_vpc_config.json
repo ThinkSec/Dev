@@ -1,0 +1,8 @@
+{
+    "ImageId": "ami-06ab68ba2b7a81c56",
+    "InstanceType": "t2.micro",
+    "MaxCount": 1,
+    "MinCount": 1,
+    "DeviceIndex": 0,
+    "AssociatePublicIpAddress": true
+}

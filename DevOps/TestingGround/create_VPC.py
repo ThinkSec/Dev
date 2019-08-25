@@ -1,21 +1,21 @@
-#source: https://blog.ipswitch.com/how-to-create-and-configure-an-aws-vpc-with-python
+#boto source: https://blog.ipswitch.com/how-to-create-and-configure-an-aws-vpc-with-python
 #json tutorial source: https://realpython.com/python-json/#python-supports-json-natively
-#Use boto3 to create a simple VPC with an EC2 instance
-#SSH will be open to the instance from source IP in variable SSHIPSource
+#Use boto3 to create a new VPC with an EC2 instance
+#SSH will be open to the instance from source IP in variable sshIpSource
+#some configurations are read in via JSON file called vpc_config.json
 import boto3
 import json
-json_dict = json.loads(importme.json)
 ec2 = boto3.resource('ec2')
 
 #customization
-cidrVPC='172.20.0.0/16'
-VPCName="demoVPC"
+cidrVpc='172.20.0.0/16'
+vpcName="demoVPC"
 cidrSubnet='172.20.1.0/24'
-SSHIPSource='0.0.0.0/0'
+sshIpSource='0.0.0.0/0'
 
 # create VPC
-vpc = ec2.create_vpc(CidrBlock=cidrVPC)
-vpc.create_tags(Tags=[{"Key": "Name", "Value": VPCName}])
+vpc = ec2.create_vpc(CidrBlock=cidrVpc)
+vpc.create_tags(Tags=[{"Key": "Name", "Value": vpcName}])
 vpc.wait_until_available()
 
 # enable public dns hostname so that we can SSH into it later
@@ -37,7 +37,7 @@ routetable.associate_with_subnet(SubnetId=subnet.id)
 
 # Create a security group and allow SSH inbound rule through the VPC
 securitygroup = ec2.create_security_group(GroupName='Admin-SSH-ONLY', Description='only allow SSH traffic', VpcId=vpc.id)
-securitygroup.authorize_ingress(CidrIp=SSHAdminIP, IpProtocol='tcp', FromPort=22, ToPort=22)
+securitygroup.authorize_ingress(CidrIp=sshIpSource, IpProtocol='tcp', FromPort=22, ToPort=22)
 
 #---------------------------------------------------------------
 #Create EC2 instance
@@ -50,16 +50,20 @@ key_pair = ec2.create_key_pair(KeyName='ec2-keypair')
 KeyPairOut = str(key_pair.key_material)
 outfile.write(KeyPairOut)
 
+#load ec2 configuration from json file
+with open('example_vpc_config.json') as jsonload:
+    ec2config = json.load(jsonload)
+
 # Create a linux instance in the subnet
 instances = ec2.create_instances(
- ImageId='ami-0de53d8956e8dcf80',
- InstanceType='t2.micro',
- MaxCount=1,
- MinCount=1,
+ ImageId=ec2config['ImageId'],
+ InstanceType=ec2config['InstanceType'],
+ MaxCount=ec2config['MaxCount'],
+ MinCount=ec2config['MinCount'],
  NetworkInterfaces=[{
  'SubnetId': subnet.id,
- 'DeviceIndex': 0,
- 'AssociatePublicIpAddress': True,
+ 'DeviceIndex': ec2config['DeviceIndex'],
+ 'AssociatePublicIpAddress': ec2config['AssociatePublicIpAddress'],
  'Groups': [securitygroup.group_id]
  }],
  KeyName='ec2-keypair')
