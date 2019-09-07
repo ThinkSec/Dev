@@ -51,7 +51,7 @@ KeyPairOut = str(key_pair.key_material)
 outfile.write(KeyPairOut)
 
 #load ec2 configuration from json file
-with open('example_vpc_config.json') as jsonload:
+with open('vpc_config.json') as jsonload:
     ec2config = json.load(jsonload)
 
 # Create a linux instance in the subnet
