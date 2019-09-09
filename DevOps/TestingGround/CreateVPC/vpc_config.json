@@ -1,4 +1,8 @@
 {
+    "cidrVpc": "172.20.0.0/16",
+    "vpcName": "demoVPC",
+    "cidrSubnet": "172.20.1.0/24",
+    "sshIpSource": "0.0.0.0/0",
     "ImageId": "ami-06ab68ba2b7a81c56",
     "InstanceType": "t2.micro",
     "MaxCount": 1,

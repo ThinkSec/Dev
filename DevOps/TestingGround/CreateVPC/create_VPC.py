@@ -7,12 +7,6 @@ import boto3
 import json
 ec2 = boto3.resource('ec2')
 
-#customization
-cidrVpc='172.20.0.0/16'
-vpcName="demoVPC"
-cidrSubnet='172.20.1.0/24'
-sshIpSource='0.0.0.0/0'
-
 # create VPC
 vpc = ec2.create_vpc(CidrBlock=cidrVpc)
 vpc.create_tags(Tags=[{"Key": "Name", "Value": vpcName}])
