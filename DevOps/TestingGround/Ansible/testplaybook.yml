@@ -1,0 +1,5 @@
+---
+- hosts: nodes
+  tasks:
+    - name: this is a test task. runs ifconfig
+      shell: ifconfig || /bin/true
