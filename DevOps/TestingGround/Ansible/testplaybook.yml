@@ -10,3 +10,4 @@
       debug: |
         msg: "Ifconfig output is:  {{ test_output }}"
         msg: "host address ouput is {{ host_address}}"
+      when: true
