@@ -6,8 +6,5 @@
     - name: "this is a test task. runs ifconfig"
       shell: ifconfig || /bin/true
       register: test_output
-    - name: "debug for learning purposes"
-      debug: |
-        msg: "Ifconfig output is:  {{ test_output }}"
-        msg: "host address ouput is {{ host_address}}"
-      when: true
+    - debug: msg="Ifconfig output is  {{ test_output }}"
+    - debug: msg="host address ouput is {{ host_address}}"
