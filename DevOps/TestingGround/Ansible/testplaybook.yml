@@ -3,6 +3,10 @@
   vars:
       host_address: "{{ ansible_facts['all_ipv4_addresses'] }}"
   tasks:
-    - name: this is a test task. runs ifconfig
+    - name: "this is a test task. runs ifconfig"
       shell: ifconfig || /bin/true
-      print: host_address
+      register: test_output
+    - name: "debug for learning purposes"
+      debug: |
+        msg: "Ifconfig output is:  {{ test_output }}"
+        msg: "host address ouput is {{ host_address}}"
