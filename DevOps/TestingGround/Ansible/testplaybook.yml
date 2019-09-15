@@ -1,7 +1,7 @@
 ---
 - hosts: nodes
   vars:
-      host_address = {{ ansible_facts['all_ipv4_addresses'] }}
+      host_address: "{{ ansible_facts['all_ipv4_addresses'] }}"
   tasks:
     - name: this is a test task. runs ifconfig
       shell: ifconfig || /bin/true
