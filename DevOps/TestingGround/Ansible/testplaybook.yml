@@ -1,5 +1,6 @@
 ---
 - hosts: nodes
+  user: root
   vars:
       host_address: "{{ ansible_facts['all_ipv4_addresses'] }}"
   tasks:
