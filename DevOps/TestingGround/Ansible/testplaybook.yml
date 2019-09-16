@@ -11,11 +11,10 @@
       yum:
         name: "nginx"
         state: present
-      register: "{{ debugout }}"
-      ignore_errors: True
+      register: debugout
     - name: print debug
       debug:
-        msg: debugout
+        msg: "{{ debugout }}"
     - name: insert index page
       template:
         src: hello_world.html
