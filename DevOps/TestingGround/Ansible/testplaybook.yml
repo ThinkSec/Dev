@@ -7,10 +7,6 @@
     - name: this is a test task. runs ifconfig.
       shell: ifconfig || /bin/true
       register: test_output
-    - name: add EPEL repo
-      yum:
-        name: epel-release
-        state: present
     - name: Install nginx
       yum:
         name: "nginx"
