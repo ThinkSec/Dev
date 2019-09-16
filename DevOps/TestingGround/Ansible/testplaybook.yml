@@ -12,6 +12,7 @@
         name: "nginx"
         state: present
       register: debugout
+      ignore_errors: True
     - name: print debug
       debug:
         msg: debugout
