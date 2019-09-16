@@ -11,6 +11,10 @@
       yum:
         name: "nginx"
         state: present
+      register: debugout
+    - name: print debug
+      debug:
+        msg: debugout
     - name: insert index page
       template:
         src: hello_world.html
