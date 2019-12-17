@@ -1,0 +1,13 @@
+{
+    "Resources": {
+        "testformation": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+                "WebsiteConfiguration": {
+                    "ErrorDocument" : "error.txt",
+                    "IndexDocument" : "index.html"
+                }
+            }
+        }
+    }
+}
