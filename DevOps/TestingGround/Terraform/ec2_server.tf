@@ -28,7 +28,7 @@ module "ec2-instance" {
   ami = "ami-b374d5a5"
   associate_public_ip_address = true
   instance_type = "t2.micro"
-  name = "Jenkins"
+  name = "Jenkins2"
   subnet_id = "subnet-0c5f0f886e832ce12"
   user_data_base64 = base64encode(local.user_data)
   vpc_security_group_ids = [module.security-group.this_security_group_id]
